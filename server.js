@@ -21,7 +21,9 @@ if (!MONGODB_URI || !JWT_SECRET || !ADMIN_EMAIL || !ADMIN_PASS) {
 }
 
 // ── MIDDLEWARE ───────────────────────────────────────────
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use(express.json());
 app.use(express.static('public')); // serve HTML file
 
