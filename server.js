@@ -21,13 +21,13 @@ if (!MONGODB_URI || !JWT_SECRET || !ADMIN_EMAIL || !ADMIN_PASS) {
 }
 
 // ── MIDDLEWARE ───────────────────────────────────────────
-
+<<<<<<< HEAD
 app.use(cors());
-
+=======
 app.use(cors({
   origin: '*'
 }));
-
+>>>>>>> 392a0984d023ad7a8bd213b0dff1a794e7990233
 app.use(express.json());
 app.use(express.static('public')); // serve HTML file
 
@@ -156,7 +156,7 @@ app.post('/api/auth/login', async (req, res) => {
 app.post('/api/auth/admin-login', async (req, res) => {
   try {
     const { email, password } = req.body;
-
+<<<<<<< HEAD
     if (email.toLowerCase() !== ADMIN_EMAIL.toLowerCase())
       return res.status(401).json({ error: 'Incorrect admin email' });
 
@@ -164,12 +164,12 @@ app.post('/api/auth/admin-login', async (req, res) => {
     const match = await bcrypt.compare(password, ADMIN_PASS);
     if (!match)
       return res.status(401).json({ error: 'Incorrect admin password' });
-
+=======
     if (password !== ADMIN_PASS)
       return res.status(401).json({ error: 'Incorrect admin password' });
     if (email.toLowerCase() !== ADMIN_EMAIL)
       return res.status(401).json({ error: 'Incorrect admin email' });
-
+>>>>>>> 392a0984d023ad7a8bd213b0dff1a794e7990233
 
     await addLog('Admin', email.toLowerCase(), 'admin', db);
 
@@ -185,19 +185,19 @@ app.post('/api/auth/admin-login', async (req, res) => {
   }
 });
 
-
+<<<<<<< HEAD
 // ── VERIFY ADMIN EMAIL (Step 1) ───────────────────────────
 app.post('/api/auth/admin-check-email', (req, res) => {
   const { email } = req.body;
   if (!email || email.toLowerCase() !== ADMIN_EMAIL.toLowerCase())
     return res.status(401).json({ error: 'Not a registered admin email' });
-
+=======
 // ── VERIFY ADMIN PASSWORD (Step 1) ───────────────────────
 app.post('/api/auth/admin-check-pwd', (req, res) => {
   const { password } = req.body;
   if (password !== ADMIN_PASS)
     return res.status(401).json({ error: 'Incorrect password' });
-
+>>>>>>> 392a0984d023ad7a8bd213b0dff1a794e7990233
   res.json({ ok: true });
 });
 
